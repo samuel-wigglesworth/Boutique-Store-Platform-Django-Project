@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+    <h3>Fashion Collections for Every Season</h3>
+    <p>Showcase your newest styles and manage digital retail operations from one platform.</p>
+</div>
+
+{% if admin_stats %}
+<div class="grid">
+    <div class="card"><strong>Products:</strong> {{ admin_stats.products }}</div>
+    <div class="card"><strong>Orders:</strong> {{ admin_stats.orders }}</div>
+    <div class="card"><strong>Sales:</strong> ${{ admin_stats.sales }}</div>
+</div>
+{% endif %}
+
+<h3>Featured Products</h3>
+<div class="grid">
+    {% for product in featured_products %}
+    <div class="card">
+        <h4>{{ product.name }}</h4>
+        <p>${{ product.price }}</p>
+        <a class="btn" href="{% url 'catalog:product_detail' product.id %}">View</a>
+    </div>
+    {% empty %}
+    <p>No products available yet. Add products from admin.</p>
+    {% endfor %}
+</div>
+{% endblock %}

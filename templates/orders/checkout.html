@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+    <h3>Checkout</h3>
+    <p>Total payable: <strong>${{ total }}</strong></p>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn" type="submit">Place Order</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+    <h3>Complete Payment for Order #{{ order.id }}</h3>
+    <p>Amount: <strong>${{ order.total_amount }}</strong></p>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn" type="submit">Confirm Payment</button>
+    </form>
+</div>
+{% endblock %}

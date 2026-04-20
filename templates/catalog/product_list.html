@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+    <h3>Product Catalog</h3>
+    <form method="get">
+        <label for="category">Filter by category</label>
+        <select id="category" name="category" onchange="this.form.submit()">
+            <option value="">All</option>
+            {% for category in categories %}
+            <option value="{{ category.id }}" {% if selected_category == category.id|stringformat:"s" %}selected{% endif %}>{{ category.name }}</option>
+            {% endfor %}
+        </select>
+    </form>
+</div>
+
+<div class="grid">
+    {% for product in products %}
+    <div class="card">
+        <h4>{{ product.name }}</h4>
+        <p>${{ product.price }} | Stock: {{ product.stock }}</p>
+        <a class="btn" href="{% url 'catalog:product_detail' product.id %}">View Details</a>
+    </div>
+    {% empty %}
+    <p>No active products.</p>
+    {% endfor %}
+</div>
+{% endblock %}

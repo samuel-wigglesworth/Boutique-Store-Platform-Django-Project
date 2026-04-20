@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+    <h3>Your Cart</h3>
+    {% if cart_items %}
+    <table>
+        <tr><th>Product</th><th>Qty</th><th>Total</th><th>Action</th></tr>
+        {% for item in cart_items %}
+        <tr>
+            <td>{{ item.product.name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>${{ item.line_total }}</td>
+            <td><a href="{% url 'orders:remove_from_cart' item.product.id %}">Remove</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <p><strong>Grand Total:</strong> ${{ total }}</p>
+    <a class="btn" href="{% url 'orders:checkout' %}">Proceed to Checkout</a>
+    {% else %}
+    <p>Your cart is empty.</p>
+    {% endif %}
+</div>
+{% endblock %}

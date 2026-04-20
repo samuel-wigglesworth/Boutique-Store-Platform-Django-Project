@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+    <h3>{{ product.name }}</h3>
+    <p>{{ product.description }}</p>
+    <p><strong>Price:</strong> ${{ product.price }}</p>
+    <p><strong>Stock:</strong> {{ product.stock }}</p>
+    {% if product.stock > 0 %}
+    <a class="btn" href="{% url 'orders:add_to_cart' product.id %}">Add to Cart</a>
+    {% else %}
+    <p>Out of stock.</p>
+    {% endif %}
+</div>
+{% endblock %}

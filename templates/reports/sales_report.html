@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+    <h3>Sales & Operations Report</h3>
+    <p><strong>Total Orders:</strong> {{ total_orders }}</p>
+    <p><strong>Total Sales:</strong> ${{ total_sales }}</p>
+</div>
+
+<div class="card">
+    <h4>Orders by Status</h4>
+    <ul>
+        {% for item in orders_by_status %}
+        <li>{{ item.status }}: {{ item.count }}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="card">
+    <h4>Recent Orders</h4>
+    <table>
+        <tr><th>ID</th><th>Customer</th><th>Status</th><th>Total</th></tr>
+        {% for order in latest_orders %}
+        <tr>
+            <td>#{{ order.id }}</td>
+            <td>{{ order.customer.username }}</td>
+            <td>{{ order.get_status_display }}</td>
+            <td>${{ order.total_amount }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
